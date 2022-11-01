@@ -2,7 +2,9 @@ import { ComponentProps, FC } from "react";
 import { LexicalComposer } from "@lexical/react/LexicalComposer";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
-import { ErrorBoundaryType } from "@lexical/react/shared/useDecorators";
+import styles from "./Editor.module.scss";
+import { AutoFocusPlugin } from "./plugins/AutoFocusPlugin";
+
 
 const initialConfig: ComponentProps<typeof LexicalComposer>["initialConfig"] = {
   namespace: "MyEditor",
@@ -12,7 +14,7 @@ const initialConfig: ComponentProps<typeof LexicalComposer>["initialConfig"] = {
 const ErrorBoundaryComponent: FC = () => {
   return (
     <>
-    error!
+      error!
     </>
   )
 }
@@ -20,11 +22,14 @@ const ErrorBoundaryComponent: FC = () => {
 export const Editor: FC = () => {
   return (
     <LexicalComposer initialConfig={initialConfig}>
-      <RichTextPlugin
-        contentEditable={<ContentEditable />}
-        placeholder={<div>いまなにしてる？</div>}
-        ErrorBoundary={ErrorBoundaryComponent}
-      />
+      <div className={styles.editorContainer}>
+        <RichTextPlugin
+          contentEditable={<ContentEditable/>}
+          placeholder={<div>いまなにしてる？</div>}
+          ErrorBoundary={ErrorBoundaryComponent}
+        />
+      </div>
+      <AutoFocusPlugin />
     </LexicalComposer>
   );
 };
