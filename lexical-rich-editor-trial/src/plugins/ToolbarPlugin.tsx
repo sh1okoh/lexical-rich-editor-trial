@@ -5,6 +5,7 @@ import { HeadingTagType, $createHeadingNode, $isHeadingNode, $createQuoteNode } 
 import { $getSelection, $isRangeSelection } from "lexical"
 import { $wrapNodes } from "@lexical/selection";
 import { INSERT_UNORDERED_LIST_COMMAND, INSERT_ORDERED_LIST_COMMAND, INSERT_CHECK_LIST_COMMAND } from "@lexical/list"
+import { $createCodeNode } from "@lexical/code"
 
 const SupportedBlockType = {
   paragraph: "Paragraph",
@@ -18,6 +19,7 @@ const SupportedBlockType = {
   number: "Numbered List",
   bullet: "Bulleted List",
   check: "Check List",
+  code: "Code Block",
 } as const;
 
 type BlockType = keyof typeof SupportedBlockType;
@@ -69,6 +71,17 @@ export const ToolbarPlugin: FC = () => {
       editor.dispatchCommand(INSERT_CHECK_LIST_COMMAND, undefined);
     }
   }, [blockType, editor]);
+
+  const formatCode = useCallback(() => {
+    if (blockType !== "code") {
+      editor.update(() => {
+        const selection = $getSelection();
+        if ($isRangeSelection(selection)) {
+          $wrapNodes(selection, () => $createCodeNode());
+        }
+      })
+    }
+  }, [blockType, editor])
 
   useEffect(() => {
     return editor.registerUpdateListener(({ editorState }) => {
@@ -168,6 +181,16 @@ export const ToolbarPlugin: FC = () => {
       >
         check
       </button>
+      <button
+        type="button"
+        role="checkbox"
+        title={SupportedBlockType["code"]}
+        aria-label={SupportedBlockType["code"]}
+        aria-checked={blockType === "code"}
+        onClick={formatCode}
+      >
+        code
+        </button>
     </div>
   );
 };

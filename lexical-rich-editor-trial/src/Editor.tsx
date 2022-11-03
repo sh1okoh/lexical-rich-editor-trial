@@ -10,6 +10,7 @@ import { nodes } from "./nodes";
 import { theme } from "./editorTheme";
 import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
+import { CodeHighlightPlugin } from "./plugins/CodeHighlightPlugin";
 
 const initialConfig: ComponentProps<typeof LexicalComposer>["initialConfig"] = {
   namespace: "MyEditor",
@@ -41,6 +42,7 @@ export const Editor: FC = () => {
       <HistoryPlugin />
       <ListPlugin />
       <CheckListPlugin />
+      <CodeHighlightPlugin />
     </LexicalComposer>
   );
 };
