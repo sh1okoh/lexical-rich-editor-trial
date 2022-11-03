@@ -8,6 +8,8 @@ import { ToolbarPlugin } from "./plugins/ToolbarPlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { nodes } from "./nodes";
 import { theme } from "./editorTheme";
+import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
+import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 
 const initialConfig: ComponentProps<typeof LexicalComposer>["initialConfig"] = {
   namespace: "MyEditor",
@@ -37,6 +39,8 @@ export const Editor: FC = () => {
       </div>
       <AutoFocusPlugin />
       <HistoryPlugin />
+      <ListPlugin />
+      <CheckListPlugin />
     </LexicalComposer>
   );
 };

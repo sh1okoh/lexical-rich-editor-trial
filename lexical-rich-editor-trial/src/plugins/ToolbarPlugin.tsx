@@ -4,6 +4,7 @@ import styles from "./ToolbarPlugin.module.scss";
 import { HeadingTagType, $createHeadingNode, $isHeadingNode, $createQuoteNode } from "@lexical/rich-text";
 import { $getSelection, $isRangeSelection } from "lexical"
 import { $wrapNodes } from "@lexical/selection";
+import { INSERT_UNORDERED_LIST_COMMAND, INSERT_ORDERED_LIST_COMMAND, INSERT_CHECK_LIST_COMMAND } from "@lexical/list"
 
 const SupportedBlockType = {
   paragraph: "Paragraph",
@@ -13,7 +14,10 @@ const SupportedBlockType = {
   h4: "Heading 4",
   h5: "Heading 5",
   h6: "Heading 6",
-  quote: "Quote"
+  quote: "Quote",
+  number: "Numbered List",
+  bullet: "Bulleted List",
+  check: "Check List",
 } as const;
 
 type BlockType = keyof typeof SupportedBlockType;
@@ -47,6 +51,24 @@ export const ToolbarPlugin: FC = () => {
       })
     }
   }, [blockType, editor])
+
+  const formatBulletList = useCallback(() => {
+    if (blockType !== "bullet") {
+      editor.dispatchCommand(INSERT_UNORDERED_LIST_COMMAND, undefined);
+    }
+  }, [blockType, editor]);
+
+  const formatNumberedList = useCallback(() => {
+    if (blockType !== "number") {
+      editor.dispatchCommand(INSERT_ORDERED_LIST_COMMAND, undefined);
+    }
+  }, [blockType, editor]);
+
+  const formatCheckList = useCallback(() => {
+    if (blockType !== "check") {
+      editor.dispatchCommand(INSERT_CHECK_LIST_COMMAND, undefined);
+    }
+  }, [blockType, editor]);
 
   useEffect(() => {
     return editor.registerUpdateListener(({ editorState }) => {
@@ -115,6 +137,36 @@ export const ToolbarPlugin: FC = () => {
         onClick={formatQuote}
       >
         引用
+      </button>
+      <button
+        type="button"
+        role="checkbox"
+        title={SupportedBlockType["bullet"]}
+        aria-label={SupportedBlockType["bullet"]}
+        aria-checked={blockType === "bullet"}
+        onClick={formatBulletList}
+      >
+        b
+      </button>
+      <button
+        type="button"
+        role="checkbox"
+        title={SupportedBlockType["number"]}
+        aria-label={SupportedBlockType["number"]}
+        aria-checked={blockType === "number"}
+        onClick={formatNumberedList}
+      >
+        num
+      </button>
+      <button
+        type="button"
+        role="checkbox"
+        title={SupportedBlockType["check"]}
+        aria-label={SupportedBlockType["check"]}
+        aria-checked={blockType === "check"}
+        onClick={formatCheckList}
+      >
+        check
       </button>
     </div>
   );
