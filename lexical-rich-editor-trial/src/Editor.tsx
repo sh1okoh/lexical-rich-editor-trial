@@ -7,12 +7,12 @@ import { AutoFocusPlugin } from "./plugins/AutoFocusPlugin";
 import { ToolbarPlugin } from "./plugins/ToolbarPlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { nodes } from "./nodes";
-
-
+import { theme } from "./editorTheme";
 
 const initialConfig: ComponentProps<typeof LexicalComposer>["initialConfig"] = {
   namespace: "MyEditor",
   onError: (error) => console.error(error),
+  theme: theme,
   nodes: nodes
 };
 
@@ -29,9 +29,8 @@ export const Editor: FC = () => {
     <LexicalComposer initialConfig={initialConfig}>
       <div className={styles.editorContainer}>
         <ToolbarPlugin />
-
         <RichTextPlugin
-          contentEditable={<ContentEditable />}
+          contentEditable={<ContentEditable style={{textAlign: 'left'}}/>}
           placeholder={<div>いまなにしてる？</div>}
           ErrorBoundary={ErrorBoundaryComponent}
         />
