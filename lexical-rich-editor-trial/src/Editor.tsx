@@ -11,6 +11,7 @@ import { theme } from "./editorTheme";
 import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { CodeHighlightPlugin } from "./plugins/CodeHighlightPlugin";
+import { InlineToolbarPlugin } from "./plugins/InlineToolbarPlugin";
 
 const initialConfig: ComponentProps<typeof LexicalComposer>["initialConfig"] = {
   namespace: "MyEditor",
@@ -32,6 +33,7 @@ export const Editor: FC = () => {
     <LexicalComposer initialConfig={initialConfig}>
       <div className={styles.editorContainer}>
         <ToolbarPlugin />
+        <InlineToolbarPlugin />
         <RichTextPlugin
           contentEditable={<ContentEditable style={{textAlign: 'left'}}/>}
           placeholder={<div>いまなにしてる？</div>}
