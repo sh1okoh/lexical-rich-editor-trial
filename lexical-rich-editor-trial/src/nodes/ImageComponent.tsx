@@ -113,6 +113,28 @@ export default function ImageComponent(
     width: 'inherit' | number;
     captionsEnabled: boolean;
   }): JSX.Element {
+    const imageRef = useRef<null | HTMLImageElement>(null);
+    const buttonRef = useRef<HTMLButtonElement | null>(null);
+    const [isSelected, setSelected, clearSelection] = useLexicalNodeSelection(nodeKey);
+    const [isResizing, setIsResizing] = useState<boolean>(false);
+    const {isCollabActive} = useCollaborationContext();
+    const [selection, setSelection] = useState<RangeSelection | NodeSelection | GridSelection | null>(null);
+    const activeEditorRef = useRef<LexicalEditor | null>(null);
+
+    const onDelete = useCallback(
+      (payload: KeyboardEvent) => {
+        if (isSelected && $isNodeSelection($getSelection())) {
+          const event: KeyboardEvent = payload;
+          event.preventDefault();
+          const node = $getNodeByKey(nodeKey);
+          if ($isImageNode(node)) {
+            node.remove();
+          }
+          setSelected(false);
+        }
+      },
+      [isSelected, nodeKey, setSelected]
+    )
     return (
       <>
       hogehoge
