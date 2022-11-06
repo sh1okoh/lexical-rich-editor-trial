@@ -63,7 +63,6 @@ export class ImageNode extends DecoratorNode<JSX.Element> {
   __maxWidth: number;
   __showCaption: boolean;
   __caption: LexicalEditor;
-  // Captions cannot yet be used within editor cells
   __captionsEnabled: boolean;
 
   static getType(): string {
