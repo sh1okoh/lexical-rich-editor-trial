@@ -1,5 +1,5 @@
 {
-  "name": "lexical-rich-editor-trial",
+  "name": "lexical-rich-editor-trial-2",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -12,16 +12,13 @@
     "@lexical/react": "^0.6.0",
     "lexical": "^0.6.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-icons": "^4.6.0",
-    "ress": "^5.0.2",
-    "sass": "^1.56.0"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.22",
-    "@types/react-dom": "^18.0.7",
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
     "@vitejs/plugin-react": "^2.2.0",
     "typescript": "^4.6.4",
-    "vite": "^3.2.0"
+    "vite": "^3.2.3"
   }
 }
