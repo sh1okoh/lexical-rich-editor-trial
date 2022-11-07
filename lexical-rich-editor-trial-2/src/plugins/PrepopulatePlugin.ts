@@ -16,6 +16,5 @@ export const PrepopulatePlugin: FC = () => {
       $insertNodes(nodes);
     })
   }, [editor]);
-
   return null;
 };

@@ -4,6 +4,7 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 import { PrepopulatePlugin } from "./plugins/PrepopulatePlugin";
+import { ConvertEditorState } from "./plugins/ConvertEditorStatePlugin";
 
 const initialConfig: ComponentProps<typeof LexicalComposer>["initialConfig"] = {
   namespace: "MyEditor",
@@ -19,6 +20,7 @@ export const Editor: FC = () => {
         ErrorBoundary={LexicalErrorBoundary}
       />
       <PrepopulatePlugin />
+      <ConvertEditorState />
     </LexicalComposer>
   );
 };
