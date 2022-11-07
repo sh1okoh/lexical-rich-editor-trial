@@ -12,6 +12,7 @@ import { CheckListPlugin } from "@lexical/react/LexicalCheckListPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { CodeHighlightPlugin } from "./plugins/CodeHighlightPlugin";
 import { InlineToolbarPlugin } from "./plugins/InlineToolbarPlugin";
+import LexicalErrorBoundary from "@lexical/react/LexicalErrorBoundary";
 
 const initialConfig: ComponentProps<typeof LexicalComposer>["initialConfig"] = {
   namespace: "MyEditor",
@@ -19,14 +20,6 @@ const initialConfig: ComponentProps<typeof LexicalComposer>["initialConfig"] = {
   theme: theme,
   nodes: nodes
 };
-
-const ErrorBoundaryComponent: FC = () => {
-  return (
-    <>
-      error!
-    </>
-  )
-}
 
 export const Editor: FC = () => {
   return (
@@ -37,7 +30,7 @@ export const Editor: FC = () => {
         <RichTextPlugin
           contentEditable={<ContentEditable style={{textAlign: 'left'}}/>}
           placeholder={<div>いまなにしてる？</div>}
-          ErrorBoundary={ErrorBoundaryComponent}
+          ErrorBoundary={LexicalErrorBoundary}
         />
       </div>
       <AutoFocusPlugin />

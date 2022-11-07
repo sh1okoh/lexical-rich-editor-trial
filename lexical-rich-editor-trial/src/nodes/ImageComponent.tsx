@@ -44,16 +44,17 @@ import {
 import * as React from 'react';
 import {Suspense, useCallback, useEffect, useRef, useState} from 'react';
 
-import { createWebsocketProvider } from '../collaboration';
-import {useSettings} from '../context/SettingsContext';
+// NOTE: 共同編集不要
+// import { createWebsocketProvider } from '../collaboration'; 
+import {　useSettings　} from '../context/SettingsContext';
 import {useSharedHistoryContext} from '../context/SharedHistoryContext';
-import EmojisPlugin from '../plugins/EmojisPlugin';
-import KeywordsPlugin from '../plugins/KeywordsPlugin';
-import MentionsPlugin from '../plugins/MentionsPlugin';
-import TreeViewPlugin from '../plugins/TreeViewPlugin';
+// import EmojisPlugin from '../plugins/EmojisPlugin';
+// import KeywordsPlugin from '../plugins/KeywordsPlugin';
+// import MentionsPlugin from '../plugins/MentionsPlugin';
+// import TreeViewPlugin from '../plugins/TreeViewPlugin';
 import ContentEditable from '../ui/ContentEditable';
 import ImageResizer from '../ui/ImageResizer';
-import Placeholder from '../ui/Placeholder';
+// import Placeholder from '../ui/Placeholder';
 import {$isImageNode} from './ImageNode';
 
 const imageCache = new Set();
@@ -328,13 +329,14 @@ export default function ImageComponent({
         {showCaption && (
           <div className="image-caption-container">
             <LexicalNestedComposer initialEditor={caption}>
-              <AutoFocusPlugin />
+              {/* <AutoFocusPlugin />
               <MentionsPlugin />
               <LinkPlugin />
               <EmojisPlugin />
               <HashtagPlugin />
-              <KeywordsPlugin />
-              {isCollabActive ? (
+              <KeywordsPlugin /> */}
+              <HistoryPlugin externalHistoryState={historyState} />
+              {/* {isCollabActive ? (
                 <CollaborationPlugin
                   id={caption.getKey()}
                   providerFactory={createWebsocketProvider}
@@ -342,7 +344,7 @@ export default function ImageComponent({
                 />
               ) : (
                 <HistoryPlugin externalHistoryState={historyState} />
-              )}
+              )} */}
               <RichTextPlugin
                 contentEditable={
                   <ContentEditable className="ImageNode__contentEditable" />
