@@ -9,7 +9,7 @@ const initialConfig: ComponentProps<typeof LexicalComposer>["initialConfig"] = {
   onError: (error) => console.error(error),
 };
 
-const Editor: FC = () => {
+const Index: FC = () => {
   return (
     <LexicalComposer initialConfig={initialConfig}>
       <RichTextPlugin
@@ -21,4 +21,4 @@ const Editor: FC = () => {
   );
 };
 
-export default Editor;
+export default Index;
