@@ -6,11 +6,14 @@ import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import styles from "./Editor.module.scss";
 import { AutoFocusPlugin } from "./plugins/AutoFocusPlugin";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
+import { nodes } from '../../nodes';
+import { ToolbarPlugin } from "./plugins/ToolbarPlugin";
 
 
 const initialConfig: ComponentProps<typeof LexicalComposer>["initialConfig"] = {
   namespace: "MyEditor",
   onError: (error) => console.error(error),
+  nodes: nodes
 };
 
 export const Index: FC = () => {
@@ -23,6 +26,7 @@ export const Index: FC = () => {
           ErrorBoundary={LexicalErrorBoundary}
         />
       </div>
+      <ToolbarPlugin />
       <AutoFocusPlugin />
       <HistoryPlugin />
     </LexicalComposer>
