@@ -4,6 +4,9 @@ import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import LexicalErrorBoundary from '@lexical/react/LexicalErrorBoundary';
 import styles from "./Editor.module.scss";
+import { AutoFocusPlugin } from "./plugins/AutoFocusPlugin";
+import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
+
 
 const initialConfig: ComponentProps<typeof LexicalComposer>["initialConfig"] = {
   namespace: "MyEditor",
@@ -20,6 +23,8 @@ export const Index: FC = () => {
           ErrorBoundary={LexicalErrorBoundary}
         />
       </div>
+      <AutoFocusPlugin />
+      <HistoryPlugin />
     </LexicalComposer>
   );
 };
